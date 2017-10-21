@@ -1,0 +1,31 @@
+apply plugin: 'com.android.application'
+
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+android {
+	compileSdkVersion 19
+	buildToolsVersion "25.0.1"
+
+	defaultConfig {
+		applicationId 'com.jakobcornell.to24'
+		minSdkVersion 16
+		targetSdkVersion 16
+	}
+
+	signingConfigs {
+		release {
+			keyAlias keystoreProperties['keyAlias']
+			keyPassword keystoreProperties['keyPassword']
+			storeFile file(keystoreProperties['storeFile'])
+			storePassword keystoreProperties['storePassword']
+		}
+	}
+
+	buildTypes {
+		release {
+			signingConfig signingConfigs.release
+		}
+	}
+}

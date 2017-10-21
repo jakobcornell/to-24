@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<manifest
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	package="com.jakobcornell.to24"
+	android:installLocation="internalOnly"
+>
+	<uses-permission android:name="android.permission.WRITE_SETTINGS" />
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+	<application android:label="To 24" android:name="com.jakobcornell.to24.Application">
+		<receiver android:name="com.jakobcornell.to24.Receiver">
+			<intent-filter>
+				<action android:name="android.intent.action.BOOT_COMPLETED" />
+				<action android:name="android.intent.action.ACTION_SHUTDOWN" />
+			</intent-filter>
+		</receiver>
+		<service
+			android:name="com.jakobcornell.to24.Service"
+			android:enabled="true"
+			android:exported="false"
+		>
+		</service>
+		<activity android:name="com.jakobcornell.to24.Activity">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+	</application>
+</manifest>
